@@ -29,7 +29,7 @@ input:active {
   border: 1px solid #4e75ff;
 }
 
-.load-more {
+.button {
   border-radius: 8px;
   padding: 8px 16px;
   width: 91px;
@@ -44,7 +44,7 @@ input:active {
   font-family: "Montserrat", sans-serif;
 }
 
-.load-more:hover {
+.button:hover {
   background: #6c8cff;
 }
 
