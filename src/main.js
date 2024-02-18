@@ -57,8 +57,10 @@ document.querySelector('.form').addEventListener('submit', async event => {
   performSearch();
 });
 
-
-document.querySelector('.load-more').addEventListener('click', () => {
-  page++;
-  performSearch();
-});
+const loadMoreBtn = document.querySelector('.load-more');
+if (loadMoreBtn) {
+  loadMoreBtn.addEventListener('click', () => {
+    page++;
+    performSearch();
+  });
+}
