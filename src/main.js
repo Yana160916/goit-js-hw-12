@@ -5,7 +5,6 @@ import "simplelightbox/dist/simple-lightbox.min.css";
 let searchQuery = '';
 let page = 1;
 
-// Функція для створення розмітки картки зображення
 const createImageCard = (image) => {
   const card = document.createElement('li');
   card.innerHTML = `
@@ -22,18 +21,19 @@ const createImageCard = (image) => {
   return card;
 };
 
-// Функція для додавання карток зображень до галереї
 const addImagesToGallery = (images) => {
   const gallery = document.querySelector('.images');
   images.forEach((image) => {
     const card = createImageCard(image);
     gallery.appendChild(card);
   });
-  
-  // Після додавання карток визиваємо метод refresh() для оновлення SimpleLightbox
-  if (images.length > 0) {
-    const lightbox = new SimpleLightbox('.images a');
-    lightbox.refresh();
+
+  const loadMoreBtn = document.querySelector('.load-more');
+  if (images.length < 15) {
+    loadMoreBtn.style.display = 'none';
+    alert("We're sorry, but you've reached the end of search results.");
+  } else {
+    loadMoreBtn.style.display = 'block';
   }
 };
 
@@ -52,18 +52,13 @@ const performSearch = async () => {
 
     addImagesToGallery(images);
 
-    const loadMoreBtn = document.querySelector('.load-more');
-    if (images.length < 15) {
-      loadMoreBtn.style.display = 'none';
-      alert("We're sorry, but you've reached the end of search results.");
-    } else {
-      loadMoreBtn.style.display = 'block';
-    }
-
+    // Optional: Scroll down to new images
     const cardHeight = document.querySelector('.images li').offsetHeight;
     window.scrollBy(0, cardHeight * 2);
+
   } catch (error) {
     console.error('Error fetching images:', error);
+    alert('Error fetching images. Please try again.'); // Show a user-friendly error message
   }
 };
 
@@ -72,7 +67,7 @@ document.querySelector('.form').addEventListener('submit', async event => {
   searchQuery = event.target.input.value;
   page = 1; 
   const gallery = document.querySelector('.images');
-  gallery.innerHTML = ''; // Очищаємо галерею перед новим пошуком
+  gallery.innerHTML = ''; // Clear the gallery before a new search
   performSearch();
 });
 
