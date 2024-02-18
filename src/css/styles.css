@@ -115,6 +115,7 @@ input:active {
   font-family: "Montserrat", sans-serif;
   cursor: pointer;
   margin-top: 16px;
+  display: none;
 }
 
 .load-more:hover {
